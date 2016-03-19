@@ -12,6 +12,8 @@ namespace Specials
 {
     public partial class frmBegin : Form
     {
+        
+
         public frmBegin()
         {
             InitializeComponent();
@@ -20,6 +22,15 @@ namespace Specials
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btnCreate_Click(object sender, EventArgs e)
+        {
+            frmModify modify = new frmModify();
+            this.Hide();
+            modify.ShowDialog();
+
+            this.Close();
         }
     }
 }

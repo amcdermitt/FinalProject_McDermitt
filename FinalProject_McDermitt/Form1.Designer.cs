@@ -39,8 +39,9 @@
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(91, 70);
             this.btnCreate.TabIndex = 0;
-            this.btnCreate.Text = "Create New Special";
+            this.btnCreate.Text = "Create or Remove Special";
             this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // btnView
             // 
