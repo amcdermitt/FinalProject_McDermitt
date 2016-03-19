@@ -10,11 +10,16 @@ using System.Windows.Forms;
 
 namespace Specials
 {
-    public partial class Form1 : Form
+    public partial class frmBegin : Form
     {
-        public Form1()
+        public frmBegin()
         {
             InitializeComponent();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
