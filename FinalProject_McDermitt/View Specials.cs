@@ -10,11 +10,62 @@ using System.Windows.Forms;
 
 namespace Specials
 {
-    public partial class View_Specials : Form
+    public partial class frmSpecials : Form
     {
-        public View_Specials()
+
+        private void gotoMainMenu()
+        {
+            frmBegin mainMenu = new frmBegin();
+            this.Hide();
+            mainMenu.ShowDialog();
+
+            this.Close();
+        }
+
+        private void gotoModify()
+        {
+            frmModify modify = new frmModify();
+            this.Hide();
+            modify.ShowDialog();
+
+            this.Close();
+        }
+
+        public frmSpecials()
         {
             InitializeComponent();
+        }
+
+        private void View_Specials_Load(object sender, EventArgs e)
+        {
+            // TODO: This line of code loads data into the 'saleItemsDataSet.Sale' table. You can move, or remove it, as needed.
+            this.saleTableAdapter.Fill(this.saleItemsDataSet.Sale);
+
+        }
+
+        private void btnBack_Click(object sender, EventArgs e)
+        {
+            gotoMainMenu();
+        }
+
+        private void mainMenuToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gotoMainMenu();
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void modifySpecialsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gotoModify();
         }
     }
 }

@@ -69,6 +69,10 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.btnExit = new System.Windows.Forms.Button();
             this.label3 = new System.Windows.Forms.Label();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
+            this.errProviderSae = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderOriginal = new System.Windows.Forms.ErrorProvider(this.components);
             saleIdLabel = new System.Windows.Forms.Label();
             product_NameLabel = new System.Windows.Forms.Label();
             sale_PriceLabel = new System.Windows.Forms.Label();
@@ -80,6 +84,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.saleBindingNavigator)).BeginInit();
             this.saleBindingNavigator.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.statusStrip1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSae)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderOriginal)).BeginInit();
             this.SuspendLayout();
             // 
             // saleIdLabel
@@ -352,7 +359,7 @@
             this.btnBack.Name = "btnBack";
             this.btnBack.Size = new System.Drawing.Size(75, 23);
             this.btnBack.TabIndex = 15;
-            this.btnBack.Text = "Back";
+            this.btnBack.Text = "&Back";
             this.btnBack.UseVisualStyleBackColor = true;
             this.btnBack.Click += new System.EventHandler(this.btnBack_Click);
             // 
@@ -379,20 +386,21 @@
             // mainMenuToolStripMenuItem
             // 
             this.mainMenuToolStripMenuItem.Name = "mainMenuToolStripMenuItem";
-            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.mainMenuToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.mainMenuToolStripMenuItem.Text = "Main Menu";
             this.mainMenuToolStripMenuItem.Click += new System.EventHandler(this.mainMenuToolStripMenuItem_Click);
             // 
             // viewSalesToolStripMenuItem
             // 
             this.viewSalesToolStripMenuItem.Name = "viewSalesToolStripMenuItem";
-            this.viewSalesToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.viewSalesToolStripMenuItem.Text = "View Sales";
+            this.viewSalesToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.viewSalesToolStripMenuItem.Text = "View Specials";
+            this.viewSalesToolStripMenuItem.Click += new System.EventHandler(this.viewSalesToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -402,7 +410,7 @@
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 17;
-            this.btnExit.Text = "Exit";
+            this.btnExit.Text = "E&xit";
             this.btnExit.UseVisualStyleBackColor = true;
             this.btnExit.Click += new System.EventHandler(this.button1_Click);
             // 
@@ -415,11 +423,35 @@
             this.label3.TabIndex = 18;
             this.label3.Text = "Save when making changes.";
             // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.lblStatus});
+            this.statusStrip1.Location = new System.Drawing.Point(0, 373);
+            this.statusStrip1.Name = "statusStrip1";
+            this.statusStrip1.Size = new System.Drawing.Size(414, 22);
+            this.statusStrip1.TabIndex = 19;
+            this.statusStrip1.Text = "statusStrip1";
+            // 
+            // lblStatus
+            // 
+            this.lblStatus.Name = "lblStatus";
+            this.lblStatus.Size = new System.Drawing.Size(0, 17);
+            // 
+            // errProviderSae
+            // 
+            this.errProviderSae.ContainerControl = this;
+            // 
+            // errProviderOriginal
+            // 
+            this.errProviderOriginal.ContainerControl = this;
+            // 
             // frmModify
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(414, 395);
+            this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.btnExit);
             this.Controls.Add(this.btnBack);
@@ -450,6 +482,10 @@
             this.saleBindingNavigator.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSae)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderOriginal)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -490,5 +526,9 @@
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
         private System.Windows.Forms.Button btnExit;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.ToolStripStatusLabel lblStatus;
+        private System.Windows.Forms.ErrorProvider errProviderSae;
+        private System.Windows.Forms.ErrorProvider errProviderOriginal;
     }
 }

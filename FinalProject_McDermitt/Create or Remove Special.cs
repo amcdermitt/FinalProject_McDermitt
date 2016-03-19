@@ -13,6 +13,15 @@ namespace Specials
     public partial class frmModify : Form
     {
 
+        private void gotoSpecials()
+        {
+            frmSpecials specials = new frmSpecials();
+            this.Hide();
+            specials.ShowDialog();
+
+            this.Close();
+        }
+
         private void gotoMainMenu()
         {
             frmBegin mainMenu = new frmBegin();
@@ -63,6 +72,11 @@ namespace Specials
         private void button1_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void viewSalesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            gotoSpecials();
         }
     }
 }
