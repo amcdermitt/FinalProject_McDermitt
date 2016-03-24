@@ -67,5 +67,40 @@ namespace Specials
         {
             gotoModify();
         }
+
+        private void lblSalePrice_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnTotal_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void chkReport_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnFilter_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void btnReport_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lstProductName_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

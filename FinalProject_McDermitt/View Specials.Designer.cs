@@ -53,22 +53,26 @@
             this.grpView = new System.Windows.Forms.GroupBox();
             this.chkReport = new System.Windows.Forms.CheckBox();
             this.grpReport = new System.Windows.Forms.GroupBox();
-            this.lstItems = new System.Windows.Forms.ListBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.grpTax = new System.Windows.Forms.GroupBox();
-            this.radYes = new System.Windows.Forms.RadioButton();
-            this.radNo = new System.Windows.Forms.RadioButton();
-            this.label4 = new System.Windows.Forms.Label();
-            this.lblCost = new System.Windows.Forms.Label();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnTotal = new System.Windows.Forms.Button();
+            this.grpFilter = new System.Windows.Forms.GroupBox();
+            this.btnFilter = new System.Windows.Forms.Button();
+            this.label5 = new System.Windows.Forms.Label();
+            this.lstFilter = new System.Windows.Forms.ListBox();
             this.btnReport = new System.Windows.Forms.Button();
+            this.lblCost = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.grpTax = new System.Windows.Forms.GroupBox();
+            this.radNo = new System.Windows.Forms.RadioButton();
+            this.radYes = new System.Windows.Forms.RadioButton();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.lstItems = new System.Windows.Forms.ListBox();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.grpFilter = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.btnFilter = new System.Windows.Forms.Button();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
+            this.errProviderExpire = new System.Windows.Forms.ErrorProvider(this.components);
+            this.label6 = new System.Windows.Forms.Label();
             sale_PriceLabel = new System.Windows.Forms.Label();
             original_PriceLabel = new System.Windows.Forms.Label();
             store_NameLabel = new System.Windows.Forms.Label();
@@ -78,9 +82,10 @@
             this.menuStrip1.SuspendLayout();
             this.grpView.SuspendLayout();
             this.grpReport.SuspendLayout();
+            this.grpFilter.SuspendLayout();
             this.grpTax.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            this.grpFilter.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderExpire)).BeginInit();
             this.SuspendLayout();
             // 
             // sale_PriceLabel
@@ -128,6 +133,7 @@
             this.lstProductName.Name = "lstProductName";
             this.lstProductName.Size = new System.Drawing.Size(130, 134);
             this.lstProductName.TabIndex = 0;
+            this.lstProductName.SelectedIndexChanged += new System.EventHandler(this.lstProductName_SelectedIndexChanged);
             // 
             // saleBindingSource
             // 
@@ -159,6 +165,7 @@
             this.lblSalePrice.TabIndex = 2;
             this.lblSalePrice.Text = "label1";
             this.lblSalePrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.lblSalePrice.Click += new System.EventHandler(this.lblSalePrice_Click);
             // 
             // lblOriginalPrice
             // 
@@ -291,9 +298,13 @@
             this.chkReport.TabIndex = 14;
             this.chkReport.Text = "Filter By Store";
             this.chkReport.UseVisualStyleBackColor = true;
+            this.chkReport.CheckedChanged += new System.EventHandler(this.chkReport_CheckedChanged);
             // 
             // grpReport
             // 
+            this.grpReport.Controls.Add(this.label6);
+            this.grpReport.Controls.Add(this.btnClear);
+            this.grpReport.Controls.Add(this.btnTotal);
             this.grpReport.Controls.Add(this.grpFilter);
             this.grpReport.Controls.Add(this.btnReport);
             this.grpReport.Controls.Add(this.lblCost);
@@ -310,32 +321,93 @@
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
             // 
-            // lstItems
+            // btnClear
             // 
-            this.lstItems.FormattingEnabled = true;
-            this.lstItems.Location = new System.Drawing.Point(20, 36);
-            this.lstItems.Name = "lstItems";
-            this.lstItems.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.lstItems.Size = new System.Drawing.Size(138, 134);
-            this.lstItems.TabIndex = 0;
+            this.btnClear.Location = new System.Drawing.Point(52, 217);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 17;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label2
+            // btnTotal
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(17, 16);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(191, 13);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Select items you would like a report on.";
+            this.btnTotal.Location = new System.Drawing.Point(255, 217);
+            this.btnTotal.Name = "btnTotal";
+            this.btnTotal.Size = new System.Drawing.Size(75, 23);
+            this.btnTotal.TabIndex = 16;
+            this.btnTotal.Text = "View Total";
+            this.btnTotal.UseVisualStyleBackColor = true;
+            this.btnTotal.Click += new System.EventHandler(this.btnTotal_Click);
             // 
-            // label3
+            // grpFilter
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(230, 16);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(124, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Include Sales Tax of 7%:";
+            this.grpFilter.Controls.Add(this.btnFilter);
+            this.grpFilter.Controls.Add(this.label5);
+            this.grpFilter.Controls.Add(this.lstFilter);
+            this.grpFilter.Enabled = false;
+            this.grpFilter.Location = new System.Drawing.Point(370, 38);
+            this.grpFilter.Name = "grpFilter";
+            this.grpFilter.Size = new System.Drawing.Size(159, 161);
+            this.grpFilter.TabIndex = 15;
+            this.grpFilter.TabStop = false;
+            // 
+            // btnFilter
+            // 
+            this.btnFilter.Location = new System.Drawing.Point(39, 132);
+            this.btnFilter.Name = "btnFilter";
+            this.btnFilter.Size = new System.Drawing.Size(75, 23);
+            this.btnFilter.TabIndex = 18;
+            this.btnFilter.Text = "Filter";
+            this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(6, 16);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(121, 13);
+            this.label5.TabIndex = 17;
+            this.label5.Text = "Select Stores to filter by:";
+            // 
+            // lstFilter
+            // 
+            this.lstFilter.FormattingEnabled = true;
+            this.lstFilter.Location = new System.Drawing.Point(6, 32);
+            this.lstFilter.Name = "lstFilter";
+            this.lstFilter.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstFilter.Size = new System.Drawing.Size(138, 95);
+            this.lstFilter.TabIndex = 16;
+            // 
+            // btnReport
+            // 
+            this.btnReport.Location = new System.Drawing.Point(403, 217);
+            this.btnReport.Name = "btnReport";
+            this.btnReport.Size = new System.Drawing.Size(94, 23);
+            this.btnReport.TabIndex = 6;
+            this.btnReport.Text = "Create Report";
+            this.btnReport.UseVisualStyleBackColor = true;
+            this.btnReport.Click += new System.EventHandler(this.btnReport_Click);
+            // 
+            // lblCost
+            // 
+            this.lblCost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblCost.Location = new System.Drawing.Point(233, 147);
+            this.lblCost.Name = "lblCost";
+            this.lblCost.Size = new System.Drawing.Size(113, 23);
+            this.lblCost.TabIndex = 5;
+            this.lblCost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(230, 128);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(116, 13);
+            this.label4.TabIndex = 4;
+            this.label4.Text = "Cost of Selected Items:";
             // 
             // grpTax
             // 
@@ -346,6 +418,16 @@
             this.grpTax.Size = new System.Drawing.Size(77, 75);
             this.grpTax.TabIndex = 3;
             this.grpTax.TabStop = false;
+            // 
+            // radNo
+            // 
+            this.radNo.AutoSize = true;
+            this.radNo.Location = new System.Drawing.Point(19, 43);
+            this.radNo.Name = "radNo";
+            this.radNo.Size = new System.Drawing.Size(39, 17);
+            this.radNo.TabIndex = 1;
+            this.radNo.Text = "No";
+            this.radNo.UseVisualStyleBackColor = true;
             // 
             // radYes
             // 
@@ -359,42 +441,32 @@
             this.radYes.Text = "Yes";
             this.radYes.UseVisualStyleBackColor = true;
             // 
-            // radNo
+            // label3
             // 
-            this.radNo.AutoSize = true;
-            this.radNo.Location = new System.Drawing.Point(19, 43);
-            this.radNo.Name = "radNo";
-            this.radNo.Size = new System.Drawing.Size(39, 17);
-            this.radNo.TabIndex = 1;
-            this.radNo.Text = "No";
-            this.radNo.UseVisualStyleBackColor = true;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(230, 16);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(124, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Include Sales Tax of 7%:";
             // 
-            // label4
+            // label2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(230, 128);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(116, 13);
-            this.label4.TabIndex = 4;
-            this.label4.Text = "Cost of Selected Items:";
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(17, 16);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(191, 13);
+            this.label2.TabIndex = 1;
+            this.label2.Text = "Select items you would like a report on.";
             // 
-            // lblCost
+            // lstItems
             // 
-            this.lblCost.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.lblCost.Location = new System.Drawing.Point(233, 147);
-            this.lblCost.Name = "lblCost";
-            this.lblCost.Size = new System.Drawing.Size(113, 23);
-            this.lblCost.TabIndex = 5;
-            this.lblCost.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // btnReport
-            // 
-            this.btnReport.Location = new System.Drawing.Point(238, 217);
-            this.btnReport.Name = "btnReport";
-            this.btnReport.Size = new System.Drawing.Size(94, 23);
-            this.btnReport.TabIndex = 6;
-            this.btnReport.Text = "Create Report";
-            this.btnReport.UseVisualStyleBackColor = true;
+            this.lstItems.FormattingEnabled = true;
+            this.lstItems.Location = new System.Drawing.Point(20, 36);
+            this.lstItems.Name = "lstItems";
+            this.lstItems.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
+            this.lstItems.Size = new System.Drawing.Size(138, 134);
+            this.lstItems.TabIndex = 0;
             // 
             // statusStrip1
             // 
@@ -411,44 +483,18 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 17);
             // 
-            // grpFilter
+            // errProviderExpire
             // 
-            this.grpFilter.Controls.Add(this.btnFilter);
-            this.grpFilter.Controls.Add(this.label5);
-            this.grpFilter.Controls.Add(this.listBox1);
-            this.grpFilter.Enabled = false;
-            this.grpFilter.Location = new System.Drawing.Point(370, 38);
-            this.grpFilter.Name = "grpFilter";
-            this.grpFilter.Size = new System.Drawing.Size(159, 161);
-            this.grpFilter.TabIndex = 15;
-            this.grpFilter.TabStop = false;
+            this.errProviderExpire.ContainerControl = this;
             // 
-            // listBox1
+            // label6
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(6, 32);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.SelectionMode = System.Windows.Forms.SelectionMode.MultiSimple;
-            this.listBox1.Size = new System.Drawing.Size(138, 95);
-            this.listBox1.TabIndex = 16;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(6, 16);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(121, 13);
-            this.label5.TabIndex = 17;
-            this.label5.Text = "Select Stores to filter by:";
-            // 
-            // btnFilter
-            // 
-            this.btnFilter.Location = new System.Drawing.Point(39, 132);
-            this.btnFilter.Name = "btnFilter";
-            this.btnFilter.Size = new System.Drawing.Size(75, 23);
-            this.btnFilter.TabIndex = 18;
-            this.btnFilter.Text = "Filter";
-            this.btnFilter.UseVisualStyleBackColor = true;
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 175);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(160, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Note: Expired items not displyed.";
             // 
             // frmSpecials
             // 
@@ -462,6 +508,7 @@
             this.Controls.Add(this.btnBack);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "frmSpecials";
             this.Text = "View Specials";
             this.Load += new System.EventHandler(this.View_Specials_Load);
@@ -473,12 +520,13 @@
             this.grpView.PerformLayout();
             this.grpReport.ResumeLayout(false);
             this.grpReport.PerformLayout();
+            this.grpFilter.ResumeLayout(false);
+            this.grpFilter.PerformLayout();
             this.grpTax.ResumeLayout(false);
             this.grpTax.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            this.grpFilter.ResumeLayout(false);
-            this.grpFilter.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderExpire)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -520,7 +568,11 @@
         private System.Windows.Forms.GroupBox grpFilter;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.ListBox lstFilter;
         private System.Windows.Forms.SaveFileDialog saveFileDialog1;
+        private System.Windows.Forms.Button btnTotal;
+        private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ErrorProvider errProviderExpire;
     }
 }

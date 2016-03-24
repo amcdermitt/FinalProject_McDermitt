@@ -71,8 +71,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
-            this.errProviderSae = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderSale = new System.Windows.Forms.ErrorProvider(this.components);
             this.errProviderOriginal = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderSaleID = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderProductName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderStoreName = new System.Windows.Forms.ErrorProvider(this.components);
+            this.errProviderExpire = new System.Windows.Forms.ErrorProvider(this.components);
+            this.editNavigator = new System.Windows.Forms.ToolStripButton();
             saleIdLabel = new System.Windows.Forms.Label();
             product_NameLabel = new System.Windows.Forms.Label();
             sale_PriceLabel = new System.Windows.Forms.Label();
@@ -85,8 +90,12 @@
             this.saleBindingNavigator.SuspendLayout();
             this.menuStrip1.SuspendLayout();
             this.statusStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errProviderSae)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSale)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProviderOriginal)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSaleID)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderProductName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderStoreName)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderExpire)).BeginInit();
             this.SuspendLayout();
             // 
             // saleIdLabel
@@ -181,7 +190,8 @@
             this.bindingNavigatorSeparator2,
             this.bindingNavigatorAddNewItem,
             this.bindingNavigatorDeleteItem,
-            this.saleBindingNavigatorSaveItem});
+            this.saleBindingNavigatorSaveItem,
+            this.editNavigator});
             this.saleBindingNavigator.Location = new System.Drawing.Point(0, 24);
             this.saleBindingNavigator.MoveFirstItem = this.bindingNavigatorMoveFirstItem;
             this.saleBindingNavigator.MoveLastItem = this.bindingNavigatorMoveLastItem;
@@ -201,6 +211,7 @@
             this.bindingNavigatorAddNewItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorAddNewItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorAddNewItem.Text = "Add new";
+            this.bindingNavigatorAddNewItem.Click += new System.EventHandler(this.bindingNavigatorAddNewItem_Click);
             // 
             // bindingNavigatorCountItem
             // 
@@ -217,6 +228,8 @@
             this.bindingNavigatorDeleteItem.RightToLeftAutoMirrorImage = true;
             this.bindingNavigatorDeleteItem.Size = new System.Drawing.Size(23, 22);
             this.bindingNavigatorDeleteItem.Text = "Delete";
+            this.bindingNavigatorDeleteItem.Click += new System.EventHandler(this.bindingNavigatorDeleteItem_Click);
+            this.bindingNavigatorDeleteItem.MouseEnter += new System.EventHandler(this.bindingNavigatorDeleteItem_MouseEnter);
             // 
             // bindingNavigatorMoveFirstItem
             // 
@@ -290,14 +303,17 @@
             // txtSaleId
             // 
             this.txtSaleId.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.saleBindingSource, "SaleId", true));
+            this.txtSaleId.Enabled = false;
             this.txtSaleId.Location = new System.Drawing.Point(124, 134);
             this.txtSaleId.Name = "txtSaleId";
             this.txtSaleId.Size = new System.Drawing.Size(200, 20);
             this.txtSaleId.TabIndex = 2;
+            this.txtSaleId.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSaleId_KeyPress);
             // 
             // txtProductName
             // 
             this.txtProductName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.saleBindingSource, "Product Name", true));
+            this.txtProductName.Enabled = false;
             this.txtProductName.Location = new System.Drawing.Point(124, 160);
             this.txtProductName.Name = "txtProductName";
             this.txtProductName.Size = new System.Drawing.Size(200, 20);
@@ -306,22 +322,27 @@
             // txtSalePrice
             // 
             this.txtSalePrice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.saleBindingSource, "Sale Price", true));
+            this.txtSalePrice.Enabled = false;
             this.txtSalePrice.Location = new System.Drawing.Point(124, 186);
             this.txtSalePrice.Name = "txtSalePrice";
             this.txtSalePrice.Size = new System.Drawing.Size(200, 20);
             this.txtSalePrice.TabIndex = 6;
+            this.txtSalePrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSalePrice_KeyPress);
             // 
             // txtOriginalPrice
             // 
             this.txtOriginalPrice.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.saleBindingSource, "Original Price", true));
+            this.txtOriginalPrice.Enabled = false;
             this.txtOriginalPrice.Location = new System.Drawing.Point(124, 212);
             this.txtOriginalPrice.Name = "txtOriginalPrice";
             this.txtOriginalPrice.Size = new System.Drawing.Size(200, 20);
             this.txtOriginalPrice.TabIndex = 8;
+            this.txtOriginalPrice.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtOriginalPrice_KeyPress);
             // 
             // txtStoreName
             // 
             this.txtStoreName.DataBindings.Add(new System.Windows.Forms.Binding("Text", this.saleBindingSource, "Store Name", true));
+            this.txtStoreName.Enabled = false;
             this.txtStoreName.Location = new System.Drawing.Point(124, 238);
             this.txtStoreName.Name = "txtStoreName";
             this.txtStoreName.Size = new System.Drawing.Size(200, 20);
@@ -330,10 +351,12 @@
             // dtpExpiration
             // 
             this.dtpExpiration.DataBindings.Add(new System.Windows.Forms.Binding("Value", this.saleBindingSource, "Expiration Date", true));
+            this.dtpExpiration.Enabled = false;
             this.dtpExpiration.Location = new System.Drawing.Point(124, 264);
             this.dtpExpiration.Name = "dtpExpiration";
             this.dtpExpiration.Size = new System.Drawing.Size(200, 20);
             this.dtpExpiration.TabIndex = 12;
+            this.dtpExpiration.MouseDown += new System.Windows.Forms.MouseEventHandler(this.dtpExpiration_MouseDown);
             // 
             // label1
             // 
@@ -438,13 +461,39 @@
             this.lblStatus.Name = "lblStatus";
             this.lblStatus.Size = new System.Drawing.Size(0, 17);
             // 
-            // errProviderSae
+            // errProviderSale
             // 
-            this.errProviderSae.ContainerControl = this;
+            this.errProviderSale.ContainerControl = this;
             // 
             // errProviderOriginal
             // 
             this.errProviderOriginal.ContainerControl = this;
+            // 
+            // errProviderSaleID
+            // 
+            this.errProviderSaleID.ContainerControl = this;
+            // 
+            // errProviderProductName
+            // 
+            this.errProviderProductName.ContainerControl = this;
+            // 
+            // errProviderStoreName
+            // 
+            this.errProviderStoreName.ContainerControl = this;
+            // 
+            // errProviderExpire
+            // 
+            this.errProviderExpire.ContainerControl = this;
+            // 
+            // editNavigator
+            // 
+            this.editNavigator.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Image;
+            this.editNavigator.Image = global::Specials.Properties.Resources.sites_pencil_icon_small;
+            this.editNavigator.ImageTransparentColor = System.Drawing.Color.Magenta;
+            this.editNavigator.Name = "editNavigator";
+            this.editNavigator.Size = new System.Drawing.Size(23, 22);
+            this.editNavigator.Text = "Exit Data";
+            this.editNavigator.Click += new System.EventHandler(this.editNavigator_Click);
             // 
             // frmModify
             // 
@@ -472,6 +521,7 @@
             this.Controls.Add(this.saleBindingNavigator);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "frmModify";
             this.Text = "Modify Specials";
             this.Load += new System.EventHandler(this.frmModify_Load);
@@ -484,8 +534,12 @@
             this.menuStrip1.PerformLayout();
             this.statusStrip1.ResumeLayout(false);
             this.statusStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.errProviderSae)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSale)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.errProviderOriginal)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderSaleID)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderProductName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderStoreName)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.errProviderExpire)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -528,7 +582,12 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.ToolStripStatusLabel lblStatus;
-        private System.Windows.Forms.ErrorProvider errProviderSae;
+        private System.Windows.Forms.ErrorProvider errProviderSale;
         private System.Windows.Forms.ErrorProvider errProviderOriginal;
+        private System.Windows.Forms.ErrorProvider errProviderSaleID;
+        private System.Windows.Forms.ErrorProvider errProviderProductName;
+        private System.Windows.Forms.ErrorProvider errProviderStoreName;
+        private System.Windows.Forms.ErrorProvider errProviderExpire;
+        private System.Windows.Forms.ToolStripButton editNavigator;
     }
 }

@@ -120,6 +120,7 @@
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "frmBegin";
             this.Text = "Specials";
             this.menuStrip1.ResumeLayout(false);

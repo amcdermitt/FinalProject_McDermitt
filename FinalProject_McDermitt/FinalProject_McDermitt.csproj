@@ -100,6 +100,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <EmbeddedResource Include="View Specials.resx">
       <DependentUpon>View Specials.cs</DependentUpon>
@@ -129,6 +130,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\sites-pencil-icon-small.gif" />
     <Content Include="saleItems.mdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

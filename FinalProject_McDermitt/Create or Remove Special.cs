@@ -78,5 +78,45 @@ namespace Specials
         {
             gotoSpecials();
         }
+
+        private void dtpExpiration_MouseDown(object sender, MouseEventArgs e)
+        {
+
+        }
+
+        private void txtSaleId_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtSalePrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void txtOriginalPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorDeleteItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorDeleteItem_MouseEnter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void bindingNavigatorAddNewItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void editNavigator_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
