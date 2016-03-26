@@ -10,8 +10,27 @@ using System.Windows.Forms;
 
 namespace Specials
 {
+
+    /// <summary>
+    /// creates an item object for the item information
+    /// </summary>
+    struct Item
+    {
+        public int id; //holds item id
+        public string productName; //holds item product name
+        public double salePrice; //holds item sale price
+        public double originalPrice; //holds item original price
+        public string storeName; //holds item store name
+        public DateTime expiration; //holds item expiration date
+    }
+
     public partial class frmSpecials : Form
     {
+
+        List<Item> saleItems = new List<Item>(); //holds list fot the sale items
+        List<Item> filterItems = new List<Item>(); //holds list fot the items that are filtered
+        List<string> productNames = new List<string>(); //holds list for the names of the products
+        const double SALES_TAX = .07; //holds sales tax constant
 
         private void gotoMainMenu()
         {
@@ -40,6 +59,22 @@ namespace Specials
         {
             // TODO: This line of code loads data into the 'saleItemsDataSet.Sale' table. You can move, or remove it, as needed.
             this.saleTableAdapter.Fill(this.saleItemsDataSet.Sale);
+            List<string> storeNames = new List<string>(); //holds store names in a list
+            Item sale = new Item(); //holds each sale item
+
+            //loops through adding each item in the database to the list through the object
+            foreach (var name in lstProductName.Items)
+            {
+
+                sale.id = int.Parse(((DataRowView)name)["SaleId"].ToString());
+                sale.productName = ((DataRowView)name)["Product Name"].ToString();
+                sale.salePrice = double.Parse(((DataRowView)name)["Sale Price"].ToString());
+                sale.originalPrice = double.Parse(((DataRowView)name)["Original Price"].ToString());
+                sale.storeName = ((DataRowView)name)["Store Name"].ToString();
+                sale.expiration = DateTime.Parse(((DataRowView)name)["Expiration Date"].ToString());
+
+                saleItems.Add(sale);
+            }
 
         }
 
