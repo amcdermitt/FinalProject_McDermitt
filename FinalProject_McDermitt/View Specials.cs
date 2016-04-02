@@ -62,6 +62,18 @@ namespace Specials
             }
         }
 
+        /// <summary>
+        /// displays items in the filter list to the listbox
+        /// </summary>
+        private void DisplayReportList()
+        {
+            foreach (Item name in filterItems)
+            {
+
+                lstItems.Items.Add(name.productName);
+            }
+        }
+
         private void gotoMainMenu()
         {
             frmBegin mainMenu = new frmBegin();
