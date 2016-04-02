@@ -178,9 +178,21 @@ namespace Specials
 
         }
 
+        /// <summary>
+        /// if the expiration date has passed, displays an errorProvider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lstProductName_SelectedIndexChanged(object sender, EventArgs e)
         {
+            errProviderExpire.Clear();
+            DateTime today = DateTime.Today; //holds today's date
 
+            //determines if the expiration date has passed or not
+            if (DateTime.Parse(lblExpiration.Text.ToString()) < today)
+            {
+                errProviderExpire.SetError(lblExpiration, "Please delete record or change Expiration Date");
+            }
         }
     }
 }
