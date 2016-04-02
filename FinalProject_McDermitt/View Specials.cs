@@ -42,6 +42,26 @@ namespace Specials
             lblStatus.Text = status;
         }
 
+        /// <summary>
+        /// copies the saleItems list with the filterItems list if the expiration has not expired
+        /// </summary>
+        private void CopyList()
+        {
+            DateTime today = DateTime.Today; //holds today's days
+
+            filterItems.Clear();
+
+            //loops to add each item as long as it is not expired
+            foreach (Item product in saleItems)
+            {
+                if (product.expiration >= today)
+                {
+                    filterItems.Add(product);
+                }
+
+            }
+        }
+
         private void gotoMainMenu()
         {
             frmBegin mainMenu = new frmBegin();
