@@ -118,6 +118,9 @@ namespace Specials
                 saleItems.Add(sale);
             }
 
+            CopyList();
+            DisplayReportList();
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)
