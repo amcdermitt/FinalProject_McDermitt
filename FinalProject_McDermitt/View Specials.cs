@@ -32,6 +32,16 @@ namespace Specials
         List<string> productNames = new List<string>(); //holds list for the names of the products
         const double SALES_TAX = .07; //holds sales tax constant
 
+
+        /// <summary>
+        /// displays string to status label
+        /// </summary>
+        /// <param name="status"></param>
+        private void DisplayStatus(string status)
+        {
+            lblStatus.Text = status;
+        }
+
         private void gotoMainMenu()
         {
             frmBegin mainMenu = new frmBegin();
