@@ -103,6 +103,22 @@ namespace Specials
             return total;
         }
 
+        /// <summary>
+        /// clears the form list and labels. resets radio button and check box. re-displays lists
+        /// </summary>
+        private void Clear()
+        {
+            lstItems.Items.Clear();
+            lstItems.ClearSelected();
+            DisplayStatus("Form Cleared");
+            lblCost.Text = "";
+            radYes.Checked = true;
+            lstFilter.ClearSelected();
+            chkReport.Checked = false;
+            CopyList();
+            DisplayReportList();
+        }
+
         private void gotoMainMenu()
         {
             frmBegin mainMenu = new frmBegin();
@@ -182,9 +198,14 @@ namespace Specials
 
         }
 
+        /// <summary>
+        /// calls clear method to clear the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnClear_Click(object sender, EventArgs e)
         {
-
+            Clear();
         }
 
         /// <summary>
