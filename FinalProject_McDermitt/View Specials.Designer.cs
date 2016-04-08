@@ -53,6 +53,7 @@
             this.grpView = new System.Windows.Forms.GroupBox();
             this.chkReport = new System.Windows.Forms.CheckBox();
             this.grpReport = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnTotal = new System.Windows.Forms.Button();
             this.grpFilter = new System.Windows.Forms.GroupBox();
@@ -72,7 +73,6 @@
             this.lblStatus = new System.Windows.Forms.ToolStripStatusLabel();
             this.saveFileDialog1 = new System.Windows.Forms.SaveFileDialog();
             this.errProviderExpire = new System.Windows.Forms.ErrorProvider(this.components);
-            this.label6 = new System.Windows.Forms.Label();
             sale_PriceLabel = new System.Windows.Forms.Label();
             original_PriceLabel = new System.Windows.Forms.Label();
             store_NameLabel = new System.Windows.Forms.Label();
@@ -163,7 +163,6 @@
             this.lblSalePrice.Name = "lblSalePrice";
             this.lblSalePrice.Size = new System.Drawing.Size(110, 23);
             this.lblSalePrice.TabIndex = 2;
-            this.lblSalePrice.Text = "label1";
             this.lblSalePrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             this.lblSalePrice.Click += new System.EventHandler(this.lblSalePrice_Click);
             // 
@@ -175,7 +174,6 @@
             this.lblOriginalPrice.Name = "lblOriginalPrice";
             this.lblOriginalPrice.Size = new System.Drawing.Size(110, 23);
             this.lblOriginalPrice.TabIndex = 4;
-            this.lblOriginalPrice.Text = "label1";
             this.lblOriginalPrice.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblStoreName
@@ -186,7 +184,6 @@
             this.lblStoreName.Name = "lblStoreName";
             this.lblStoreName.Size = new System.Drawing.Size(110, 23);
             this.lblStoreName.TabIndex = 6;
-            this.lblStoreName.Text = "label1";
             this.lblStoreName.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // lblExpiration
@@ -197,7 +194,6 @@
             this.lblExpiration.Name = "lblExpiration";
             this.lblExpiration.Size = new System.Drawing.Size(110, 23);
             this.lblExpiration.TabIndex = 8;
-            this.lblExpiration.Text = "label1";
             this.lblExpiration.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // btnBack
@@ -320,6 +316,15 @@
             this.grpReport.TabIndex = 15;
             this.grpReport.TabStop = false;
             this.grpReport.Text = "Report";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(17, 175);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(160, 13);
+            this.label6.TabIndex = 18;
+            this.label6.Text = "Note: Expired items not displyed.";
             // 
             // btnClear
             // 
@@ -486,15 +491,6 @@
             // errProviderExpire
             // 
             this.errProviderExpire.ContainerControl = this;
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(17, 175);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(160, 13);
-            this.label6.TabIndex = 18;
-            this.label6.Text = "Note: Expired items not displyed.";
             // 
             // frmSpecials
             // 
