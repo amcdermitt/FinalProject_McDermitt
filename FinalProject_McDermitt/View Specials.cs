@@ -187,9 +187,26 @@ namespace Specials
 
         }
 
+        /// <summary>
+        /// gets the selected indecies and adds to a list, calls the method to get the transaction total and displays labels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnTotal_Click(object sender, EventArgs e)
         {
+            List<int> selectedItems = new List<int>(); //list to holds selected indecies
+            double amount; //variable to hold total amount
 
+            //loops through selected indecies and adding to list
+            foreach (int number in lstItems.SelectedIndices)
+            {
+                selectedItems.Add(number);
+            }
+
+            amount = TransactionTotal(selectedItems);
+
+            lblCost.Text = amount.ToString("c");
+            DisplayStatus("Total Amount Displayed.");
         }
 
         private void chkReport_CheckedChanged(object sender, EventArgs e)
