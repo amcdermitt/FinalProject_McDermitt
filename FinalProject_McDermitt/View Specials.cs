@@ -232,7 +232,14 @@ namespace Specials
 
         private void chkReport_CheckedChanged(object sender, EventArgs e)
         {
-
+            if (chkReport.Checked)
+            {
+                grpFilter.Enabled = true;
+            }
+            else
+            {
+                grpFilter.Enabled = false;
+            }
         }
 
         private void btnFilter_Click(object sender, EventArgs e)
