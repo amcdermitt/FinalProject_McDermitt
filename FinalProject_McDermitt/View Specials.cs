@@ -166,6 +166,39 @@ namespace Specials
             CopyList();
             DisplayReportList();
 
+            DateTime today = DateTime.Today; //holds today's date
+
+            //adds each store name to the storeNames list
+            foreach (Item storeName in saleItems)
+            {
+                if (storeName.expiration >= today)
+                {
+                    storeNames.Add(storeName.storeName);
+                }
+
+            }
+
+            //sorts the list
+            storeNames.Sort();
+
+            //loops through the storeNames list and deletes duplicates
+            int index = 0;//holds index
+            while (index < storeNames.Count - 1)
+            {
+                if (storeNames[index] == storeNames[index + 1])
+                    storeNames.RemoveAt(index);
+                else
+                {
+                    index++;
+                }
+            }
+
+            //adds all of the store names to the list box
+            foreach (string name in storeNames)
+            {
+                lstFilter.Items.Add(name);
+            }
+
         }
 
         private void btnBack_Click(object sender, EventArgs e)
@@ -230,6 +263,11 @@ namespace Specials
             DisplayStatus("Total Amount Displayed.");
         }
 
+        /// <summary>
+        /// enables or disables the group box when checked
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkReport_CheckedChanged(object sender, EventArgs e)
         {
             if (chkReport.Checked)
@@ -242,9 +280,57 @@ namespace Specials
             }
         }
 
+
+        /// <summary>
+        /// gets which stores are selected and calls methods to filter the listbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnFilter_Click(object sender, EventArgs e)
         {
+            if (lstFilter.SelectedIndex == -1)
+            {
+                DisplayStatus("No store selected to filter.  Please select a store.");
+                return;
+            }
+            List<string> selectedItem = new List<string>(); //holds all of the selected store names
+            filterItems.Clear(); //clears the filterItems list
 
+            //loops through the selected store names and adds them to the selectedItem list
+            foreach (string name in lstFilter.SelectedItems)
+            {
+                selectedItem.Add(name);
+            }
+
+            //clears the lstItems listbox
+            lstItems.Items.Clear();
+
+            //adds each item with the selected store name to the filterItems list
+            DateTime today = DateTime.Today;
+            foreach (Item name in saleItems)
+            {
+
+                foreach (string storeName in selectedItem)
+                {
+                    if (name.storeName == storeName)
+                    {
+
+                        if (name.expiration >= today)
+                        {
+                            filterItems.Add(name);
+                        }
+                        // filterItems.Add(name);
+                        // lstItems.Items.Add(name.productName);
+                    }
+                }
+
+
+
+
+
+            }
+            //re-displays listbox
+            DisplayReportList();
         }
 
         private void btnReport_Click(object sender, EventArgs e)
