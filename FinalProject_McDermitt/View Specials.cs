@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ Name: Andrew McDermitt
+ Project: Final Project: Sales Application
+ Date: 4/21/2016
+ Purpose: Form to view the specials and create reports.
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,6 +13,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Specials
 {
@@ -147,18 +154,24 @@ namespace Specials
             DisplayReportList();
         }
 
+        /// <summary>
+        /// method to switch to the main menu
+        /// </summary>
         private void gotoMainMenu()
         {
-            frmBegin mainMenu = new frmBegin();
+            frmBegin mainMenu = new frmBegin(); //creates a mainMenu variable to switch to the main menu
             this.Hide();
             mainMenu.ShowDialog();
 
             this.Close();
         }
 
+        /// <summary>
+        /// method to switch to the modify form
+        /// </summary>
         private void gotoModify()
         {
-            frmModify modify = new frmModify();
+            frmModify modify = new frmModify(); //creates a modify variable to switch to the modify form
             this.Hide();
             modify.ShowDialog();
 
@@ -170,6 +183,11 @@ namespace Specials
             InitializeComponent();
         }
 
+        /// <summary>
+        /// displays all information from the database and adds it to an object list, calls other methods to copy and display more items
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void View_Specials_Load(object sender, EventArgs e)
         {
             // TODO: This line of code loads data into the 'saleItemsDataSet.Sale' table. You can move, or remove it, as needed.
@@ -229,31 +247,61 @@ namespace Specials
 
         }
 
+        /// <summary>
+        /// calls gotoMainMenu method and goes back to main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnBack_Click(object sender, EventArgs e)
         {
             gotoMainMenu();
         }
 
+        /// <summary>
+        /// calls gotoMainMenu method and goes back to main menu
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainMenuToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gotoMainMenu();
         }
 
+        /// <summary>
+        /// exits the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnExit_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// exits the application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Close();
         }
 
+        /// <summary>
+        /// calls the gotoModify method and goes to the modify form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void modifySpecialsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             gotoModify();
         }
 
+        /// <summary>
+        /// nothing
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void lblSalePrice_Click(object sender, EventArgs e)
         {
 
@@ -361,9 +409,71 @@ namespace Specials
             DisplayReportList();
         }
 
+        /// <summary>
+        /// creates report with the selected items in a new file
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnReport_Click(object sender, EventArgs e)
         {
+            StreamWriter outputFile; //holds streamwriter
+            double amount = 0; //holds total sale amount
+            double original = 0; //holds amount without sale
+            double savings = 0; //holds the savings amount
+            saveFileDialog1.Filter = "Text | *.txt | Word Document | *.doc "; //filters the way you can save files
 
+            //when the user presses OK
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                outputFile = File.CreateText(saveFileDialog1.FileName); //creates new text file
+
+                List<int> selectedItems = new List<int>(); //holds selectedItems in a list
+
+                //adds all selected items into new list
+                foreach (int number in lstItems.SelectedIndices)
+                {
+                    selectedItems.Add(number);
+                }
+
+                //loops through and outputs all item information to the list
+                foreach (int number in selectedItems)
+                {
+
+                    outputFile.WriteLine("Item: " + filterItems[number].productName);
+                    outputFile.WriteLine("Sale Price: " + filterItems[number].salePrice.ToString("c"));
+                    outputFile.WriteLine("Original Price: " + filterItems[number].originalPrice.ToString("c"));
+                    outputFile.WriteLine("Store Name: " + filterItems[number].storeName);
+                    outputFile.WriteLine("Expiration Date: " + filterItems[number].expiration);
+                    outputFile.WriteLine("");
+
+                }
+
+                amount = TransactionTotal(selectedItems); //gets the total sale amount
+                original = TransactionSavings(selectedItems); //gets the total amount without sale
+                savings = original - amount; //holds total savings
+                outputFile.WriteLine("------------------------------");
+
+                //determines if they wanted tax or not
+                if (radYes.Checked)
+                {
+                    outputFile.WriteLine("You chose to include tax: ");
+                }
+                else
+                {
+                    outputFile.WriteLine("You chose to not include tax: ");
+                }
+
+                //displays information
+                outputFile.WriteLine("It would cost " + original.ToString("c") + " at normal price");
+                outputFile.WriteLine("It costs " + amount.ToString("c") + " at the sale price");
+                outputFile.WriteLine("You are saving a total of " + savings.ToString("c"));
+
+
+
+                outputFile.Close();
+
+                DisplayStatus("Report Created");
+            }
         }
 
         /// <summary>

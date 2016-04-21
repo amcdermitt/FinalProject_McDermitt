@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+ Name: Andrew McDermitt
+ Project: Final Project: Sales Application
+ Date: 4/21/2016
+ Purpose: Form to modify sales.
+*/
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
