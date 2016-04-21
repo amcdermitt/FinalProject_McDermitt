@@ -75,6 +75,34 @@ namespace Specials
         }
 
         /// <summary>
+        /// determines what the price of selected items are when not on sale
+        /// </summary>
+        /// <param name="index"></param>
+        /// <returns></returns>
+        private double TransactionSavings(List<int> index)
+        {
+            double subtotal = 0; //holds subtotal
+            double total = 0; //holds total including tax
+
+            //adds all of the selected products original prices together
+            foreach (int number in index)
+            {
+                subtotal += filterItems[number].originalPrice;
+            }
+
+            //checks to see if the radio button is yes or no and adds or doesnt add tax
+            if (radYes.Checked)
+            {
+                total = subtotal + (subtotal * SALES_TAX);
+            }
+            else
+            {
+                total = subtotal;
+            }
+            return total;
+        }
+
+        /// <summary>
         /// determines what the price of the selected items are when they are on sale
         /// </summary>
         /// <param name="index"></param>
